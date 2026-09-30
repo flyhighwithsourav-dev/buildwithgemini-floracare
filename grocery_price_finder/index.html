@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartGrocery - Multi-Store Price Comparison</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header Navigation -->
+    <header class="top-app-bar">
+      <div class="brand-section">
+        <div class="brand-logo">
+          <span class="logo-icon">🛒</span>
+        </div>
+        <div>
+          <h1 class="brand-title">SmartGrocery</h1>
+          <p class="brand-subtitle">Find the lowest price across 6 stores</p>
+        </div>
+      </div>
+      
+      <div class="location-pill" id="locationPill" onclick="toggleLocationModal()">
+        <span class="loc-icon">📍</span>
+        <span class="loc-text" id="currentLocationText">Seattle, WA 98101</span>
+        <span class="chevron">▼</span>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- Hero & Quick Search -->
+      <section class="search-section">
+        <div class="search-bar-wrapper">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="Search groceries (e.g. Milk, Eggs, Avocado, Coffee, Chicken)..." autocomplete="off">
+          <button class="clear-btn" id="clearBtn" onclick="clearSearch()">✕</button>
+        </div>
+
+        <!-- Category Chip Selector -->
+        <div class="category-scroll">
+          <button class="chip active" onclick="filterCategory('all', this)">🔥 All Deals</button>
+          <button class="chip" onclick="filterCategory('dairy', this)">🥛 Dairy & Eggs</button>
+          <button class="chip" onclick="filterCategory('produce', this)">🥑 Fresh Produce</button>
+          <button class="chip" onclick="filterCategory('meat', this)">🥩 Meat & Seafood</button>
+          <button class="chip" onclick="filterCategory('pantry', this)">🌾 Pantry Staples</button>
+          <button class="chip" onclick="filterCategory('beverages', this)">☕ Beverages</button>
+        </div>
+      </section>
+
+      <!-- Store Availability Banner -->
+      <section class="store-row">
+        <span class="store-row-title">Comparing 6 Live Stores:</span>
+        <div class="store-badges">
+          <span class="store-badge walmart">Walmart</span>
+          <span class="store-badge amazon">Amazon Fresh</span>
+          <span class="store-badge instacart">Instacart</span>
+          <span class="store-badge target">Target</span>
+          <span class="store-badge kroger">Kroger</span>
+          <span class="store-badge wholefoods">Whole Foods</span>
+        </div>
+      </section>
+
+      <!-- Cart Optimizer Summary Bar -->
+      <section class="basket-summary-card" id="basketSummaryCard">
+        <div class="basket-header">
+          <div>
+            <h3 class="basket-title">🛒 Basket Optimizer (<span id="cartCount">0</span> items)</h3>
+            <p class="basket-desc">Calculate total savings across single vs split orders</p>
+          </div>
+          <button class="optimize-btn" onclick="openOptimizerModal()">Optimize Basket</button>
+        </div>
+      </section>
+
+      <!-- Products & Price Matrix -->
+      <section class="products-grid" id="productsGrid">
+        <!-- Injected via JavaScript -->
+      </section>
+
+    </main>
+
+    <!-- Location Modal -->
+    <div class="modal-overlay" id="locationModal">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3>📍 Set Your Location</h3>
+          <button class="close-modal-btn" onclick="toggleLocationModal()">✕</button>
+        </div>
+        <p class="modal-desc">Prices and store delivery availability update based on your zip code.</p>
+        
+        <div class="form-group">
+          <label>Zip Code / City</label>
+          <input type="text" id="zipInput" value="98101" placeholder="Enter zip code (e.g. 98101, 10001, 90210)">
+        </div>
+
+        <div class="location-presets">
+          <span class="preset-tag" onclick="selectPresetLoc('98101', 'Seattle, WA 98101')">Seattle, WA (98101)</span>
+          <span class="preset-tag" onclick="selectPresetLoc('10001', 'New York, NY 10001')">New York, NY (10001)</span>
+          <span class="preset-tag" onclick="selectPresetLoc('90210', 'Los Angeles, CA 90210')">Los Angeles, CA (90210)</span>
+          <span class="preset-tag" onclick="selectPresetLoc('60601', 'Chicago, IL 60601')">Chicago, IL (60601)</span>
+        </div>
+
+        <button class="primary-btn" onclick="saveLocation()">Update Location</button>
+      </div>
+    </div>
+
+    <!-- Basket Optimizer Modal -->
+    <div class="modal-overlay" id="optimizerModal">
+      <div class="modal-card large">
+        <div class="modal-header">
+          <h3>⚡ Basket Cost Optimizer</h3>
+          <button class="close-modal-btn" onclick="closeOptimizerModal()">✕</button>
+        </div>
+        <div id="optimizerResults">
+          <!-- Injected via JavaScript -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
